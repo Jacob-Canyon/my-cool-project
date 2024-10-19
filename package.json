@@ -8,6 +8,7 @@
   },
   "author": "Jacob Canyon",
   "dependencies": {
+    "@tcgdex/sdk": "^2.6.0-beta.1",
     "parcel": "^2.8.3",
     "prettier": "^2.8.4"
   }

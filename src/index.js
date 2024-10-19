@@ -1,3 +1,13 @@
-import App from './App';
+import { loadHeaderFooter } from "./utils.mjs";
 
-document.getElementById('root').appendChild(App());
+loadHeaderFooter();
+
+hamButton = document.querySelector('#hamButton');
+
+const navElement = document.querySelector('.menuLinks');
+
+hamButton.addEventListener('click', () => {
+    navElement.classList.toggle('open');
+});
+
+
