@@ -1,4 +1,6 @@
 
+import { createElement } from "./utils.mjs";
+
 const apiUrl = 'https://api.tcgdex.net/v2/en/sets/swsh3/100'
 
 function cardTemple() {
@@ -23,9 +25,12 @@ function cardTemple() {
 }
 
 function imageCard(card) {
+
+
   let dyanmicImage = document.createElement('img');
   let button = document.createElement("button");
-  const cardImg = document.querySelector(".card");
+  let cardImg = document.createElement("card");
+
   dyanmicImage.src = `${card.image}/high.webp`;
   button.innerText = "Add to Deck"
   button.class = "addBtn"
@@ -37,15 +42,19 @@ function imageCard(card) {
 
 
 
-function renderListWithTemplate(templateFn, parentElement, list, position = "afterbegin", clear = false,) {
-  const htmlStrings = list.map(templateFn);
-  if (clear) {
-    parentElement.innerHTML = "";
-  }
 
-  parentElement.insertAdjacentHTML(position, htmlStrings.join(""));
+
+function cards() {
+  const title = createElement('h2', { textContent: 'Page 1' });
+
+  const page3Link = createElement('a', {
+    href: '/#/cards',
+    textContent: 'Link to Page 3',
+  });
+
+  cardTemple();
+
+  return createElement('div', {}, [title, page3Link]);
 }
 
-cardTemple();
-
-
+export default cards;

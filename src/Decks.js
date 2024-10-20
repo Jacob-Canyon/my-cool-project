@@ -22,11 +22,15 @@ fetch(apiUrl)
   });
 
 function imageCard(data) {
-  const imageDis = document.getElementById("card");
   let dyanmicImage = document.createElement('img');
-
 
   dyanmicImage.src = `${data.image}high.webp`;
 
-  imageDis.appendChild(dyanmicImage);
+  document.querySelector("#root").appendChild(dyanmicImage);
 }
+
+function deck() {
+
+}
+
+export default deck;
