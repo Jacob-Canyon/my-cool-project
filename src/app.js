@@ -1,6 +1,10 @@
 import { createElement } from './utils';
 import { initRouter } from './router';
 
+
+
+
+
 function Header(mainDiv) {
     const appTitle = createElement('h1', {
         textContent: "Jake's Poke Deck Builder",
@@ -27,13 +31,17 @@ function Header(mainDiv) {
 }
 
 function imageHolder() {
-    return createElement("div", { class: "mainImage" });
+    const heroImg = createElement("div", { class: "mainImage" });
+    return heroImg;
 }
 
 function Footer() {
     const copyright = createElement('span', {
         textContent: `Copyright © ${new Date().getFullYear()}`,
     });
+
+    const socialTags = createElement('img', {})
+    socialTags.src = "/public/images/facebook_logo_primary.png"
 
     return createElement('footer', {}, [copyright]);
 }
