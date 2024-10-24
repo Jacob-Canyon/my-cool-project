@@ -6,7 +6,7 @@ import home from './home';
 
 export function initRouter(mainView) {
     function updateView(newView) {
-        mainView.innerHTML = '';
+        mainView.innerHTML = "";
         mainView.appendChild(newView);
     }
 
@@ -23,6 +23,7 @@ export function initRouter(mainView) {
             case '#/deck':
                 updateView(deck());
                 break;
+
 
             default:
                 updateView(createElement('h3', { textContent: '404 Page Not Found' }));

@@ -40,10 +40,12 @@ function Footer() {
         textContent: `Copyright © ${new Date().getFullYear()}`,
     });
 
-    const socialTags = createElement('img', {})
-    socialTags.src = "/public/images/facebook_logo_primary.png"
+    const disclaimer = createElement("span", {
+        textContent:
+            "This is a student project"
+    })
 
-    return createElement('footer', {}, [copyright]);
+    return createElement('footer', {}, [copyright, disclaimer]);
 }
 
 function App() {
@@ -51,7 +53,7 @@ function App() {
 
     initRouter(main);
 
-    return createElement('div', {}, [Header(main), main, Footer(), imageHolder()]);
+    return createElement('div', {}, [Header(main), main, imageHolder(), Footer()]);
 }
 
 export default App;

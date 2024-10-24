@@ -1,36 +1,63 @@
+import { createElement, getLocalStorage, setLocalStorage } from "./utils.mjs";
 
 
 
-// Define the API URL
-const apiUrl = 'https://api.tcgdex.net/v2/en/cards/swsh3-136';
-const nameElement = document.getElementById("name");
 
-// Make a GET request
-fetch(apiUrl)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log(data);
-    imageCard(data);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-
-function imageCard(data) {
-  let dyanmicImage = document.createElement('img');
-
-  dyanmicImage.src = `${data.image}high.webp`;
-
-  document.querySelector("#root").appendChild(dyanmicImage);
-}
 
 function deck() {
 
+
+
+  const title = createElement('h2', { textContent: 'Here is your Deck' })
+
+  const deck = getLocalStorage("deck");
+
+  const imageHolder = createElement("div", {})
+
+  const deckCount = createElement("span", { textContent: `Deck ${deck.length}/60` })
+
+  deck.forEach(card => {
+    let img = createElement("img", { src: card });
+
+
+
+    let removeBtn = createElement("button", { textContent: "Remove" });
+    removeBtn.dataset.place = deck.indexOf(card);
+    removeBtn.addEventListener("click", function (event) {
+      const deck = getLocalStorage("deck");
+      const targetElement = event.target;
+      var removedCard = targetElement.dataset.place;
+
+      const index = deck.indexOf(removedCard);
+      if (index > -1) {
+        deck.splice(index, 1);
+      }
+
+      setLocalStorage("deck", deck);
+
+
+
+
+
+    });
+
+
+
+    imageHolder.appendChild(img);
+    imageHolder.appendChild(removeBtn);
+
+  });
+
+  console.log(imageHolder)
+
+
+
+
+
+  return createElement("div", {}, [title, deckCount, imageHolder]);
+
 }
+
+
 
 export default deck;

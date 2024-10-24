@@ -1,12 +1,20 @@
 export function getLocalStorage(key) {
-    if (!localStorage.getItem("deck")) {
-        localStorage.setItem("deck", "[]");
+    if (!localStorage.getItem(key)) {
+        const empty = []
+        localStorage.setItem(key, JSON.stringify(empty));
     }
+
     return JSON.parse(localStorage.getItem(key));
 }
 
 export function setLocalStorage(key, data) {
-    localStorage.setItem(key, JSON.stringify(data));
+
+    var olddeck = getLocalStorage(key)
+    olddeck.push(data);
+    console.log(olddeck);
+
+
+    localStorage.setItem(key, JSON.stringify(olddeck));
 }
 
 export function renderWithTemplate(template, parentElement, data, callback) {
@@ -23,15 +31,7 @@ export async function loadTemplate(path) {
     return template;
 }
 
-export async function loadHeaderFooter() {
-    const headerTemplate = await loadTemplate("partials/header.html");
-    const headerElement = document.querySelector("#main-header");
-    const footerTemplate = await loadTemplate("partials/footer.html");
-    const footerElement = document.querySelector("#main-footer");
 
-    renderWithTemplate(headerTemplate, headerElement);
-    renderWithTemplate(footerTemplate, footerElement);
-}
 
 export function initRouter(mainView) {
 
