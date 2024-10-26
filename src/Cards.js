@@ -16,7 +16,6 @@ function sets() {
   set1.addEventListener("click", function (event) {
     const targetElement = event.target;
     var stingSet = targetElement.dataset.set
-    console.log(stingSet);
     displaySet(stingSet);
   });
 
@@ -34,7 +33,7 @@ function sets() {
   set2.addEventListener("click", function (event) {
     const targetElement = event.target;
     var stingSet = targetElement.dataset.set
-    console.log(stingSet);
+
     displaySet(stingSet);
   });
 
@@ -49,7 +48,7 @@ function sets() {
   set3.addEventListener("click", function (event) {
     const targetElement = event.target;
     var stingSet = targetElement.dataset.set
-    console.log(stingSet);
+
     displaySet(stingSet);
   });
 
@@ -88,11 +87,12 @@ function displaySet(set) {
 
 
         addbtn.addEventListener("click", function (event) {
-          const targetElement = event.target;
-          var stingLink = targetElement.dataset.id
-          console.log(stingLink)
-          setLocalStorage("deck", stingLink);
+
+
+          setLocalStorage("deck", card);
         });
+
+
 
         addbtn.innerText = "Add Card";
 
@@ -116,9 +116,6 @@ function displaySet(set) {
 
 function cards() {
   const title = createElement('h2', { textContent: 'Card Sets' });
-
-
-
 
 
 

@@ -11,8 +11,6 @@ export function setLocalStorage(key, data) {
 
     var olddeck = getLocalStorage(key)
     olddeck.push(data);
-    console.log(olddeck);
-
 
     localStorage.setItem(key, JSON.stringify(olddeck));
 }
