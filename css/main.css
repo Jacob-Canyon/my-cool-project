@@ -243,16 +243,23 @@ main {
   background-color: var(--accent2-color);
 }
 
+.add-button:active {
+  background-color: var(--primary-color);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 /* Deck */
 
 .deckHolder {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(auto-fill, auto);
   grid-row-gap: .5em;
   grid-column-gap: 1em;
-  margin-left: 2rem;
+  padding-left: 6rem;
+  padding-right: 6rem;
 }
 
 .deckHolder img {
@@ -263,23 +270,35 @@ main {
 }
 
 .deckHolder img:hover {
-  transform: scale(2);
+  transform: scale(1.5);
 }
 
 .deckButton {
-  margin-top: 1rem;
+  margin-top: .7rem;
+  margin-bottom: 1rem;
   font-size: large;
+  max-width: 70%;
+  align-items: center;
 }
 
 .deckButton:hover {
   background-color: var(--accent2-color);
 }
 
+.deckButton:active {
+  background-color: var(--primary-color);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 .cardDiv {
+  display: flex;
   justify-items: center;
+  flex-direction: column;
 }
 
 footer {
+  position: relative;
   display: flex;
   text-align: center;
   padding: 16px;
@@ -287,11 +306,9 @@ footer {
   align-items: center;
   background-color: var(--primary-color);
   box-sizing: border-box;
-  margin-top: 2rem;
+  margin-top: 3rem;
   font-family: var(--smaller-font);
 }
-
-
 
 
 
