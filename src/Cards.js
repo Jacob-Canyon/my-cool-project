@@ -1,67 +1,54 @@
 
-import { createElement, setLocalStorage } from "./utils.mjs";
+import { createElement, setLocalStorage, getLocalStorage, updateDeck } from "./utils.mjs";
 
 
 const baseURL = "https://api.tcgdex.net/v2/en/sets/"
 
-const set = "base1"
+
 function sets() {
 
-  const set1 = createElement('button', {
-    textContent: 'Base Set',
-  });
 
-  set1.dataset.set = "base1";
-
-  set1.addEventListener("click", function (event) {
-    const targetElement = event.target;
-    var stingSet = targetElement.dataset.set
-    displaySet(stingSet);
-  });
-
-
-
-
-  const set2 = createElement('button', {
-
-    textContent: 'Jungle',
-    data: "base2",
-  });
-
-  set2.dataset.set = "base2";
-
-  set2.addEventListener("click", function (event) {
-    const targetElement = event.target;
-    var stingSet = targetElement.dataset.set
-
-    displaySet(stingSet);
-  });
+  fetch(baseURL)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data)
+      data.forEach(cardSet => {
+        const setBtn = createElement("button", { textContent: cardSet.name, className: "set-button" })
+        document.querySelector(".setHolder").appendChild(setBtn);
 
 
-  const set3 = createElement('button', {
-    textContent: 'Fossil',
-    data: "base3",
-  });
+        setBtn.dataset.id = `${cardSet.id}`;
 
-  set3.dataset.set = "base3";
+        setBtn.addEventListener("click", function (event) {
+          const targetElement = event.target;
+          var stingSet = targetElement.dataset.id
 
-  set3.addEventListener("click", function (event) {
-    const targetElement = event.target;
-    var stingSet = targetElement.dataset.set
+          displaySet(stingSet);
+        });
+      })
+    }
 
-    displaySet(stingSet);
-  });
+    )
+    .catch(error => {
+      console.error('Error:', error);
+    });
 
 
+  return createElement("div", {});
 
-  return createElement("div", {}, [set1, set2, set3])
+
 
 }
 
 function displaySet(set) {
 
 
-  document.querySelectorAll(".card").forEach(el => el.remove());
+  document.querySelectorAll(".card-list").forEach(el => el.remove());
 
 
   fetch(baseURL + set)
@@ -75,21 +62,27 @@ function displaySet(set) {
 
       data.cards.forEach(card => {
 
-        let cardDiv = document.createElement("div")
-        cardDiv.className = "card"
+        let cardDiv = document.createElement("div");
+        cardDiv.className = "card-list";
 
+        let imgDiv = document.createElement("div");
         let dyanmicImage = document.createElement('img');
+        imgDiv.appendChild(dyanmicImage);
+        dyanmicImage.className = "card-img"
+        dyanmicImage.alt = `Image of ${card.name}`
 
+        let addbtnDiv = document.createElement("div");
         let addbtn = document.createElement("button");
-        addbtn.dataset.id = `${card.image}/high.webp`;
-
-
+        addbtn.className = "add-button";
+        addbtnDiv.appendChild(addbtn);
 
 
         addbtn.addEventListener("click", function (event) {
 
 
           setLocalStorage("deck", card);
+
+          updateDeck();
         });
 
 
@@ -98,9 +91,10 @@ function displaySet(set) {
 
         dyanmicImage.src = `${card.image}/high.webp`;
 
-        cardDiv.appendChild(dyanmicImage)
-        cardDiv.appendChild(addbtn);
-        document.querySelector("main").appendChild(cardDiv);
+
+        cardDiv.appendChild(imgDiv)
+        cardDiv.appendChild(addbtnDiv);
+        document.querySelector(".cardHolder").appendChild(cardDiv);
       })
 
     })
@@ -115,11 +109,26 @@ function displaySet(set) {
 
 
 function cards() {
-  const title = createElement('h2', { textContent: 'Card Sets' });
+
+
+  const cardHolder = createElement("div", { className: "cardHolder" });
+
+  const setHolder = createElement("div", { className: "setHolder" })
+
+  const deck = getLocalStorage("deck");
+
+  const deckCount = createElement("span", {
+    textContent: `Deck ${deck.length}/60`,
+    id: "deckCount"
+  })
+
+  document.querySelector(".countHolder").innerHTML = ""
+
+  document.querySelector(".countHolder").appendChild(deckCount);
 
 
 
-  return createElement('div', {}, [title, sets()])
+  return createElement('div', { className: "cardMain" }, [setHolder, sets(), cardHolder])
 
 }
 

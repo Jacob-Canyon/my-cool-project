@@ -1,37 +1,32 @@
-import { createElement, getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { createElement, getLocalStorage, updateDeck } from "./utils.mjs";
 
 
-function updateDeck() {
-
-  const deck = getLocalStorage("deck");
-
-  const deckCount = document.getElementById("deckCount")
-  deckCount.innerText = `Deck ${deck.length}/60`
-
-}
 
 
 function deck() {
-
 
 
   const title = createElement('h2', { textContent: 'Here is your Deck' })
 
   const deck = getLocalStorage("deck");
 
-  const imageHolder = createElement("div", {})
+  const imageHolder = createElement("div", { className: "deckHolder" })
 
   const deckCount = createElement("span", {
     textContent: `Deck ${deck.length}/60`,
     id: "deckCount"
   })
+  document.querySelector(".countHolder").innerHTML = ""
+
+  document.querySelector(".countHolder").appendChild(deckCount)
 
   deck.forEach(card => {
     let img = createElement("img", { src: `${card.image}/high.webp` });
 
-
-
-    let removeBtn = createElement("button", { textContent: "Remove" });
+    let removeBtn = createElement("button", {
+      textContent: "Remove",
+      className: "deckButton",
+    });
 
     removeBtn.dataset.id = card.id;
 
@@ -41,8 +36,6 @@ function deck() {
       const targetElement = event.target;
       const dataset = targetElement.dataset.id;
       const index = modifiedDeck.findIndex(el => el.id == dataset)
-
-
 
       if (index !== -1) {
         modifiedDeck.splice(index, 1)
@@ -58,12 +51,12 @@ function deck() {
 
     });
 
-    const cardDiv = createElement("div", {})
 
-
+    const cardDiv = createElement("div", { className: "cardDiv" });
 
     cardDiv.appendChild(img);
     cardDiv.appendChild(removeBtn);
+
 
     imageHolder.appendChild(cardDiv);
 
@@ -75,7 +68,7 @@ function deck() {
 
 
 
-  return createElement("div", {}, [title, deckCount, imageHolder]);
+  return createElement("div", {}, [title, imageHolder]);
 
 }
 

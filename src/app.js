@@ -25,9 +25,11 @@ function Header(mainDiv) {
         textContent: 'Deck',
     });
 
+    const countHolder = createElement("div", { className: "countHolder" });
+
     const nav = createElement('nav', {}, [Home, Deck, Cards]);
 
-    return createElement('header', {}, [appTitle, nav]);
+    return createElement('header', {}, [appTitle, countHolder, nav]);
 }
 
 function imageHolder() {

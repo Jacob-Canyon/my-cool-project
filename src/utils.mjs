@@ -79,3 +79,12 @@ export function createElement(type, props = {}, children = []) {
 
     return element;
 }
+
+export function updateDeck() {
+
+    const deck = getLocalStorage("deck");
+
+    const deckCount = document.getElementById("deckCount")
+    deckCount.innerText = `Deck ${deck.length}/60`
+
+}
