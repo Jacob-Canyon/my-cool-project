@@ -55,7 +55,7 @@ function App() {
 
     initRouter(main);
 
-    return createElement('div', {}, [Header(main), main, imageHolder(), Footer()]);
+    return createElement('div', { className: "allContent" }, [Header(main), main, imageHolder(), Footer()]);
 }
 
 export default App;

@@ -8,6 +8,11 @@
   --paragraph-font: "Mukta", sans-serif;
 }
 
+.allContent {
+  width: 100vw;
+  margin: 0;
+}
+
 body {
   background-color: var(--accent1-color);
   height: 100vh;
@@ -32,8 +37,7 @@ P {
 
 
 button {
-  height: 100px;
-  width: 300px;
+
   background-color: var(--secondary-color);
   color: black;
   border-radius: 5%;
@@ -89,6 +93,8 @@ nav a {
 }
 
 a {
+  margin-left: 2rem;
+  margin-right: 2rem;
   font-family: var(--larger-font);
   text-decoration: none;
   background-color: var(--secondary-color);
@@ -101,6 +107,7 @@ a {
   font-size: 20px;
   text-decoration: none;
   border-radius: 8px;
+  gap: 8px;
 }
 
 
@@ -108,13 +115,8 @@ a:hover {
   background-color: var(--accent2-color);
   border: #666 4px;
 
-
 }
 
-
-nav a:hover {
-  background-color: var(--accent2-color);
-}
 
 /*--------- Main------------------*/
 
@@ -177,6 +179,10 @@ main {
 
 /*Cards JS */
 
+.setHolder {
+  width: 100vw;
+}
+
 
 .set-button {
   height: auto;
@@ -192,21 +198,32 @@ main {
   background-color: var(--primary-color);
 }
 
+.set-button:active {
+  background-color: var(--primary-color);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
 .cardHolder {
 
-  width: 100vw;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(auto-fill, auto);
   grid-row-gap: .5em;
   grid-column-gap: 1em;
-  align-items: center;
+  margin: 0;
 
 }
 
 .cardHolder img {
-  width: 100%;
+  width: 90%;
   height: auto;
+}
+
+.cardList {
+  display: block;
+  margin: 0;
 }
 
 
@@ -217,7 +234,8 @@ main {
   height: auto;
   box-shadow: 0 2px #999;
   border: none;
-  margin-top: .5em;
+  display: block;
+  margin: 0;
 
 }
 
@@ -225,21 +243,27 @@ main {
   background-color: var(--accent2-color);
 }
 
-.add-button:active {
-  background-color: var(--primary-color);
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-}
-
 /* Deck */
 
 .deckHolder {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(auto-fill, auto);
   grid-row-gap: .5em;
   grid-column-gap: 1em;
+  margin-left: 2rem;
+}
+
+.deckHolder img {
+  width: 70%;
+  height: auto;
+  transition: .2s;
+
+}
+
+.deckHolder img:hover {
+  transform: scale(2);
 }
 
 .deckButton {
@@ -278,21 +302,26 @@ footer {
 
   header {
     max-height: fit-content;
+    width: 100vw;
+  }
+
+  .allContent {
+    width: 100%;
+    margin: 0;
   }
 
   nav,
   footer {
     flex-direction: column;
+    width: 100vw;
+  }
+
+  nav a {
     width: 100%;
   }
 
-  #hamButton {
-    display: flex;
-  }
 
-  .selection {
-    flex-direction: column;
-  }
+
 
   main {
     margin-top: 15rem;
@@ -303,12 +332,7 @@ footer {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(auto-fill, auto);
-    grid-row-gap: .5em;
-    grid-column-gap: 1em;
-  }
-
-  .countHolder {
-    margin-left: 6rem;
+    justify-content: center;
   }
 
   .cardHolder {
